@@ -10,6 +10,7 @@ go get github.com/AlekSi/gocov-xml
 go install github.com/AlekSi/gocov-xml
 
 export PKGS=$(glide novendor)
+
 # We only cover packages with source code e.g. the integration tests folder only contains _test.go files
 export PKGS_COV=$(go list -f '{{if (len .GoFiles)}}{{.ImportPath}}
 {{end}}' $PKGS | paste -sd "," -)
