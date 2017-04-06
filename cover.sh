@@ -12,7 +12,7 @@ go install github.com/AlekSi/gocov-xml
 defaultArg="glide novendor"
 ARG1=${1:-$defaultArg}
 export ARG2=${2}
-export PKGS=$($ARG1)
+export PKGS=$(echo "$ARG1"|sh)
 
 # We only cover packages with source code e.g. the integration tests folder only contains _test.go files
 export PKGS_COV=$(go list -f '{{if (len .GoFiles)}}{{.ImportPath}}
