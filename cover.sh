@@ -22,7 +22,7 @@ export PKGS_COV=$(go list -f '{{if (len .GoFiles)}}{{.ImportPath}}
 # Note: the Go coverage tool is geared towards measuring coverage of an individual package from its tests.
 # Also ensure we don't get clashes from identically named packages
 rm -f *.cov
-go list -f '{{if or (len .TestGoFiles) (len .XTestGoFiles)}}go test $ARG2 -covermode set -coverprofile {{.Name}}_{{len .Imports}}_{{len .Deps}}.cov -coverpkg $PKGS_COV {{.ImportPath}}{{end}}' $PKGS | xargs -I {} bash -c {}
+go list -f '{{if or (len .TestGoFiles) (len .XTestGoFiles)}}go test -v $ARG2 -covermode set -coverprofile {{.Name}}_{{len .Imports}}_{{len .Deps}}.cov -coverpkg $PKGS_COV {{.ImportPath}}{{end}}' $PKGS | xargs -I {} bash -c {}
 
 # Merge all the coverage files together
 echo Merging `ls *.cov` into coverage.cov
